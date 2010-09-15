@@ -38,12 +38,12 @@
   (rails/button-action (next-button (point-min))))
 
 (defun rails/generator-bundle/create-cache (root)
-  "Create a cache file from script/generate output."
+  "Create a cache file from rails generate output."
   (in-directory root
                 (let ((string (rails/proxy/shell-command-to-string
                                root
                                (format
-                                "%s script/generate --help"
+                                (concat "%s " rails/script-name("generate") "--help")
                                 rails/ruby/command)))
                       (pos 0)
                       tasks)
@@ -72,8 +72,7 @@
     (unless script-options
       (setq script-options ""))
     (rails/runner/run root
-                      rails/ruby/command (format "script/%s %s %s %s"
-                                                 what
+                      rails/ruby/command (format (concat rails/script-name(what) " %s %s %s")
                                                  task
                                                  options
                                                  script-options)
