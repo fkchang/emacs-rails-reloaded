@@ -43,7 +43,7 @@
                 (let ((string (rails/proxy/shell-command-to-string
                                root
                                (format
-                                (concat "%s " rails/script-name("generate") "--help")
+                                (concat "%s " (rails/script-name "generate") "--help")
                                 rails/ruby/command)))
                       (pos 0)
                       tasks)
@@ -72,7 +72,7 @@
     (unless script-options
       (setq script-options ""))
     (rails/runner/run root
-                      rails/ruby/command (format (concat rails/script-name(what) " %s %s %s")
+                      rails/ruby/command (format (concat (rails/script-name what) " %s %s %s")
                                                  task
                                                  options
                                                  script-options)
