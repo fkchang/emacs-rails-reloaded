@@ -74,5 +74,29 @@
                    (concat root rails/project/config))))
       (when (listp config)
         config))))
+;; compile the way I like it from old emacs-rails
+(defmacro* rails-project:with-root ((root) &body body)
+  "If you use `rails-project:root' or functions related on it
+several times in a block of code, you can optimize your code by
+using this macro. Also, blocks of code will be executed only if
+rails-root exist.
+ (rails-project:with-root (root)
+    (foo root)
+    (bar (rails-core:file \"some/path\")))
+ "
+ `(let ((,root (rails/root)))
+    (when ,root
+      (flet ((rails/root () ,root))
+        ,@body))))
+
+(defmacro* rails-project:in-root-with-cd (&rest body)
+  (let ((root (gensym)))
+  `(rails-project:with-root (,root)
+    (in-directory (,root) ,@body))))
+
+(defun rails-project:compile-in-root (command)
+  (rails-project:in-root-with-cd
+   (compile command)))
+
 
 (provide 'rails-project)

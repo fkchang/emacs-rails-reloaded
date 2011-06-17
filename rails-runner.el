@@ -107,7 +107,8 @@
 
 (defun rails/runner/prepare-buffer (proc)
   (set-process-filter proc 'ansi-color-insertion-filter)
-  (set-process-coding-system proc 'utf-8 'utf-8))
+  (set-process-coding-system proc 'utf-8 'utf-8)
+  )
 
 (defun rails/runner/run (root command parameters &rest options)
   "Run a Rails script COMMAND with PARAMETERS in ROOT with

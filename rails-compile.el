@@ -75,7 +75,7 @@
 	 1 4 nil '(3 . 2) 1)))
 
 
-(define-derived-mode rails/compilation-mode comint-mode "RCompile"
+(define-derived-mode rails/compilation-mode compilation-mode "RCompile"
   "Major mode for RoR tests."
   (set (make-local-variable 'font-lock-keywords-only) t)
   (set (make-local-variable 'font-lock-keywords) nil)
@@ -90,6 +90,8 @@
        '(rails/compile/error)))
 
 (defun rails/compile/run (root command args)
+  (rails/runner/popup-buffer)
+  (setq compile-command (format "%s %s" command args))
   (rails/runner/run root command args :mode 'rails/compilation-mode)
   (setq rails/runner/after-stop-func-list
 	'(rails/runner/popup-buffer-if-failed)))
