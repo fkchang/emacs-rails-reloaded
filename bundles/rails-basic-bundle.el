@@ -58,6 +58,11 @@
 (rails/defbundle "Basic"
   ()
 
+  (rails/defresource 'presenter "Presenter"
+                     :dir "app/presenters"
+                     :file-ext  "rb"
+                     :file-suffix "_presenter")
+
   (rails/defresource 'controller "Controller"
                      :dir "app/controllers"
                      :file-ext  "rb"

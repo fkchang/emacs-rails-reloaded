@@ -49,7 +49,7 @@
 ;;;
 (rails/defbundle "RSpec"
   (:menu
-   (([method]    (cons "Run Current Mehtod" 'rails/compile/current-method))
+   (([method]    (cons "Run Current Method" 'rails/compile/current-method))
     ([file]      (cons "Run Single File"   'rails/compile/single-file)))
    :after-load-bundles
    'rails/rspec-bundle/after-load)
@@ -72,6 +72,13 @@
                      :file-suffix  "_controller_spec"
                      :file-ext  "rb"
                      :test-to 'controller)
+
+  (rails/defresource 'presenter-spec "RSpec Presenter"
+                     :group 'spec
+                     :dir "spec/presenters"
+                     :file-suffix  "_presenter_spec"
+                     :file-ext  "rb"
+                     :test-to 'presenter)
 
   (rails/defresource 'helper-spec "RSpec Helper"
                      :group 'spec
